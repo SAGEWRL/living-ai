@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living AI Observatory</title>
+    <style>
+        :root{--bg:#000000;--card:#0f0f0f;--muted:#9aa0a6;--accent:#ffffff;--success:#10b981}
+        body{font-family:Segoe UI,system-ui,Arial;background:linear-gradient(180deg,var(--bg),#0b0b0b);color:#ffffff;margin:0}
+        .container{max-width:1400px;margin:24px auto;padding:20px}
+        h1{font-size:2.6rem;color:var(--accent);margin-bottom:6px}
+        .subtitle{color:var(--muted);margin-bottom:18px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+        .card{background:var(--card);border:1px solid rgba(255,255,255,0.04);padding:16px;border-radius:10px;color:#e7e7e7}
+        .card h2{color:#ffffff;margin:0 0 10px 0;font-size:1.05rem}
+        .stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+        .stat:last-child{border-bottom:none}
+        .small{color:var(--muted);font-size:0.9rem}
+        .value{font-weight:700;color:#ffffff}
+        #thoughts{height:120px;overflow:auto;background:rgba(255,255,255,0.02);padding:8px;border-radius:6px;font-family:monospace;font-size:0.95rem;color:#f5f5f5}
+        code{background:transparent;color:#ffffff}
+        .panel-wide{grid-column:1/-1}
+        a, a:visited{color:#ffffff}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Living AI Observatory</h1>
+        <div class="subtitle">Identity, goals, beliefs, memory, attention, simulation and learning — in real time.</div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Identity</h2>
+                <div class="stat"><span class="small">Name</span><span class="value" id="id-name">Loading...</span></div>
+                <div class="stat"><span class="small">Version</span><span class="value" id="id-version">—</span></div>
+                <div class="stat"><span class="small">Status</span><span class="value" id="id-status" style="color:var(--success)">Active</span></div>
+            </div>
+
+            <div class="card">
+                <h2>Active Goals</h2>
+                <div class="stat"><span class="small">Current Goal</span><span class="value" id="goal-current">Loading...</span></div>
+                <div class="stat"><span class="small">Priority</span><span class="value" id="goal-priority">—</span></div>
+                <div class="stat"><span class="small">Progress</span><span class="value" id="goal-progress">—</span></div>
+            </div>
+
+            <div class="card">
+                <h2>Beliefs</h2>
+                <div class="stat"><span class="small">Belief Count</span><span class="value" id="belief-count">Loading...</span></div>
+                <div style="color:var(--muted);font-size:0.85rem">Dynamically populated from system beliefs engine</div>
+            </div>
+
+            <div class="card">
+                <h2>Memory (Recent)</h2>
+                <div class="small" id="mem-recent">Loading memory data...</div>
+            </div>
+
+            <div class="card">
+                <h2>Attention</h2>
+                <div class="small" style="color:var(--muted)">Real-time from attention engine</div>
+            </div>
+
+            <div class="card">
+                <h2>Internal Thoughts</h2>
+                <div id="thoughts" style="color:var(--muted)">Waiting for system thoughts...</div>
+            </div>
+
+            <div class="card panel-wide">
+                <h2>Live System State</h2>
+                <div style="color:var(--muted);font-size:0.9rem">
+                    <strong>Data Sources:</strong><br>
+                    • <code>/whoami</code> — Identity, traits, lessons<br>
+                    • <code>/system/status</code> — Runtime, goals, memory, beliefs<br>
+                    • <code>/goals</code> — Active &amp; completed goals<br>
+                    • <code>/ws</code> — WebSocket stream for real-time updates<br>
+                    <br>
+                    <strong>How to Use:</strong><br>
+                    1. Send goals to the system via <code>POST /goals</code><br>
+                    2. Ingest alerts via <code>POST /alerts/ingest</code><br>
+                    3. Watch the Observatory update in real-time<br>
+                    4. Check <code>/autonomy/status</code> for autonomous decision logs<br>
+                    5. Use <code>?api_key=YOUR_KEY</code> to access your instance
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Runtime Health</h2>
+                <div class="stat"><span class="small">Uptime</span><span class="value" id="rt-uptime">—</span></div>
+                <div class="stat"><span class="small">Health</span><span class="value" id="rt-health">—</span></div>
+            </div>
+
+            <div class="card panel-wide">
+                <h2>Learning History</h2>
+                <div style="color:var(--muted);font-size:0.9rem" id="learning-history">Loading lessons learned...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = new URLSearchParams(location.search).get('api_key') || 'demo-key';
+        const API_QUERY = `?api_key=${encodeURIComponent(API_KEY)}`;
+
+        // Mock/fallback data for demo
+        const DEMO_DATA = {
+            whoami: { identity: { name: 'LivingAI' }, lessons_learned: ['Learned to prioritize goals', 'Memory retrieval improved'] },
+            status: { runtime: { uptime_seconds: 3600, health_score: 0.98 }, memory: { short_term_count: 12 } },
+            goals: { active_goals: [{ goal: 'Optimize reasoning', priority: 8, progress: 45 }] }
+        };
+
+        // Fetch real data from the system on load
+        async function loadLiveData() {
+            try {
+                let whoami, status, goals;
+                
+                // Try to fetch from API, fallback to demo data
+                try {
+                    whoami = await fetch(`/whoami${API_QUERY}`).then(r => r.json());
+                } catch { whoami = DEMO_DATA.whoami; }
+                
+                try {
+                    status = await fetch(`/system/status${API_QUERY}`).then(r => r.json());
+                } catch { status = DEMO_DATA.status; }
+                
+                try {
+                    goals = await fetch(`/goals${API_QUERY}`).then(r => r.json());
+                } catch { goals = DEMO_DATA.goals; }
+
+                // Update Identity
+                if (whoami?.identity) {
+                    document.getElementById('id-name').textContent = whoami.identity.name || 'LivingAI';
+                    document.getElementById('id-version').textContent = whoami.identity.version || 'unknown';
+                    document.getElementById('id-status').textContent = whoami.identity.status || 'active';
+                }
+
+                // Update Runtime Health
+                if (status?.runtime) {
+                    const runtime = status.runtime.system_state || {};
+                    document.getElementById('rt-uptime').textContent = runtime.status || 'unknown';
+                    document.getElementById('rt-health').textContent = status.autonomy?.running ? 'autonomous' : 'manual';
+                }
+
+                // Update Memory
+                if (status?.memory) {
+                    const memory = status.memory;
+                    document.getElementById('mem-recent').textContent =
+                        `${memory.short_term || 0} short-term, ${memory.long_term || 0} long-term, ${memory.priority || 0} priority`;
+                }
+
+                // Update Goals
+                if (goals?.active_goals && goals.active_goals.length > 0) {
+                    const g = goals.active_goals[0];
+                    document.getElementById('goal-current').textContent = g.goal || 'Idle';
+                    document.getElementById('goal-priority').textContent = g.priority || '—';
+                    document.getElementById('goal-progress').textContent = (g.progress || 0).toFixed(0) + '%';
+                }
+
+                // Update Beliefs
+                if (status?.belief_count !== undefined) {
+                    document.getElementById('belief-count').textContent = `${status.belief_count} beliefs logged`;
+                }
+
+                // Update Learning History
+                if (whoami?.lessons_learned && whoami.lessons_learned.length > 0) {
+                    const lessons = whoami.lessons_learned.slice(0, 3)
+                        .map((l, i) => `Lesson ${i + 1}: ${typeof l === 'string' ? l : JSON.stringify(l)}`)
+                        .join('<br>');
+                    document.getElementById('learning-history').innerHTML = lessons;
+                }
+            } catch (err) {
+                console.error('Failed to load live data:', err);
+            }
+        }
+
+        // Stream live updates via websocket
+        function initWebSocket() {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}/ws${API_QUERY}`;
+            try {
+                const ws = new WebSocket(wsUrl);
+                ws.onmessage = e => {
+                    try {
+                        const msg = JSON.parse(e.data);
+                        if (msg.type === 'event' && (msg.event === 'thought_update' || msg.event === 'thought')) {
+                            const thoughts = document.getElementById('thoughts');
+                            const newLine = msg.data?.text || msg.data?.thought || msg.text || '';
+                            if (newLine && newLine !== 'Waiting for system thoughts...') {
+                                thoughts.innerHTML = newLine + '<br>' + thoughts.innerHTML;
+                                const lines = thoughts.innerHTML.split('<br>').filter(l => l.trim());
+                                thoughts.innerHTML = lines.slice(0, 5).join('<br>');
+                            }
+                        }
+                        if (msg.type === 'status_update') {
+                            loadLiveData(); // Refresh full state on updates
+                        }
+                    } catch (err) {}
+                };
+                ws.onerror = () => {
+                    document.getElementById('thoughts').innerHTML = '(WebSocket unavailable)';
+                };
+            } catch (err) { 
+                console.warn('WebSocket unavailable'); 
+                document.getElementById('thoughts').innerHTML = '(WebSocket unavailable)';
+            }
+        }
+
+        // Load on page open
+        loadLiveData();
+        initWebSocket();
+        
+        // Refresh every 5 seconds for continuous updates
+        setInterval(loadLiveData, 5000);
+    </script>
+</body>
+</html>

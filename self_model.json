@@ -1,0 +1,282 @@
+{
+  "identity_traits": {
+    "core_beliefs": [],
+    "learned_patterns": [
+      "should",
+      "dream",
+      "money.i",
+      "company.",
+      "next?",
+      "robotics",
+      "only",
+      "progress",
+      "because",
+      "more",
+      "frustrated",
+      "build",
+      "important",
+      "goal:build",
+      "have",
+      "$100.i'm",
+      "than",
+      "believe",
+      "slow.what",
+      "company.i",
+      "learning"
+    ],
+    "key_experiences": [
+      "Goal:Build a robotics company.",
+      "My dream is to build a robotics company.I believe learning is more important than money.I only have $100.I'm frustrated because progress is slow.What should I do next?"
+    ]
+  },
+  "autonomous_goals": [
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "simulation_opportunity",
+      "objective": "Explore transformation pathway",
+      "priority": "medium",
+      "reason": "Simulation predicts evolutionary potential"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    },
+    {
+      "source": "cognitive_tension",
+      "objective": "Reduce internal tension",
+      "priority": "critical",
+      "reason": "High cognitive tension detected"
+    }
+  ],
+  "kernel_goals": [
+    {
+      "id": "7ebd95f5ec1d43c6937e4529177483d1",
+      "goal": "Investigate alert: Alert: test disk full",
+      "priority": 6,
+      "status": "active"
+    },
+    {
+      "id": "7665234db981468a8643232f1315d746",
+      "goal": "Investigate alert: Disk usage above 90% on server X",
+      "priority": 8,
+      "status": "active"
+    }
+  ],
+  "autonomy_history": [],
+  "goal_evolution_history": [],
+  "goal_completion_history": [
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780318361.7917814,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780318915.9379432,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780319366.161901,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780320052.781104,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780320611.7994986,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780433890.8917434,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780433980.8605056,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780434348.535684,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780742866.3457384,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780818207.5347822,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780818281.393343,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1780818362.2639184,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1782043785.2382345,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1782047784.786925,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1782061049.0465112,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1782069086.487711,
+      "performance_score": 0.0
+    },
+    {
+      "goal": "endpoint-created-goal",
+      "completed_at": 1782069792.859636,
+      "performance_score": 0.0
+    }
+  ],
+  "timestamp": 1782069792.9751718
+}

@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=living_ai
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    depends_on:
+      - redis
+      - db
+    ports:
+      - "8000:8000"
+    environment:
+      - LIVING_AI_STORAGE_BACKEND=both
+      - LIVING_AI_REDIS_URL=redis://redis:6379/0
+      - LIVING_AI_POSTGRES_DSN=postgresql://postgres:postgres@db:5432/living_ai
+      - LIVING_AI_USE_QUEUE=1
+      - LIVING_AI_API_KEYS=demo-key
+
+  worker:
+    build: .
+    command: rq worker -u redis://redis:6379/0 livingai
+    depends_on:
+      - redis
+      - db
+    environment:
+      - LIVING_AI_STORAGE_BACKEND=both
+      - LIVING_AI_REDIS_URL=redis://redis:6379/0
+      - LIVING_AI_POSTGRES_DSN=postgresql://postgres:postgres@db:5432/living_ai

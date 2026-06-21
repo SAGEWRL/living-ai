@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+requests
+sentence-transformers
+faiss-cpu
+numpy
+torch
+redis
+rq
+psycopg2-binary
