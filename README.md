@@ -1,125 +1,260 @@
-# Living AI Framework
+Living AI
 
-## Overview
+Persistent Adaptive Intelligence Framework
 
-Living AI is a cognitive AI architecture that models a persistent, adaptive agent rather than a simple request/response bot. It combines memory, beliefs, goals, planning, decision-making, simulation, emotion, reflection, and learning into a single runtime.
+«Building the cognitive infrastructure for persistent, adaptive, and autonomous intelligence.»
 
-## Features
+---
 
-- Semantic and vector memory storage
-- Distributed memory persistence
-- Belief extraction and worldview inference
-- Goal selection and planner integration
-- Emotion detection and behavior adaptation
-- Simulation of future scenarios
-- Reflection and learning from execution results
-- Structured response generation
+Vision
 
-## Quick Start
+Living AI is an open cognitive infrastructure framework designed to move artificial intelligence beyond stateless request-response systems toward persistent adaptive intelligence.
 
-Install dependencies:
+Modern AI models are excellent at reasoning within a single conversation but lack long-term continuity. Living AI provides the cognitive architecture required for AI systems to remember, form beliefs, pursue goals, learn from experience, adapt their behavior, and evolve over time.
 
-```bash
+The long-term vision is to establish a foundation for persistent autonomous intelligence and contribute toward the development of Artificial General Intelligence (AGI).
+
+---
+
+Why Living AI?
+
+Today's AI systems typically suffer from several limitations:
+
+- No persistent identity
+- No long-term memory
+- No evolving belief system
+- No autonomous goal management
+- Limited adaptation over time
+- No continuous cognitive state
+
+Living AI addresses these challenges by introducing a unified cognitive runtime capable of maintaining persistent intelligence across interactions.
+
+Rather than replacing existing language models, Living AI provides the cognitive layer that enables them to function as adaptive, long-lived intelligent agents.
+
+---
+
+Core Cognitive Architecture
+
+                 User
+                   │
+                   ▼
+        Cognitive Reasoning
+                   │
+                   ▼
+        Semantic Memory System
+                   │
+                   ▼
+          Belief Formation
+                   │
+                   ▼
+          Goal Management
+                   │
+                   ▼
+       Planning & Decision Engine
+                   │
+                   ▼
+      Internal Simulation Engine
+                   │
+                   ▼
+     Reflection & Learning Engine
+                   │
+                   ▼
+      Adaptive Behaviour Engine
+                   │
+                   ▼
+          Natural Response
+
+Every interaction contributes to an evolving cognitive state rather than existing as an isolated request.
+
+---
+
+Current Capabilities
+
+Living AI currently includes:
+
+- Persistent semantic memory
+- Redis short-term cognitive memory
+- PostgreSQL long-term memory
+- Belief extraction and belief evolution
+- Goal generation and autonomous goal management
+- Cognitive reasoning engine
+- Multi-path reasoning
+- Decision engine
+- Planning engine
+- Internal future simulation
+- Reflection and self-improvement
+- Adaptive behaviour engine
+- Emotion modelling
+- Cognitive kernel
+- Autonomous runtime
+- Cognitive observatory support
+- Runtime persistence
+- Modular architecture
+
+---
+
+Storage Architecture
+
+Living AI separates cognition into short-term and long-term memory.
+
+Redis
+
+Used for:
+
+- Active working memory
+- Current cognitive state
+- Attention management
+- Runtime beliefs
+- Active goals
+- Runtime context
+
+PostgreSQL
+
+Used for:
+
+- Long-term memory
+- Identity persistence
+- Goal history
+- Belief history
+- Reflection history
+- Simulation history
+- Cognitive evolution
+
+This hybrid architecture enables both fast reasoning and durable persistence.
+
+---
+
+Installation
+
+Clone the repository
+
+git clone https://github.com/SAGEWRL/living-ai.git
+
+Install dependencies
+
 pip install -r requirements.txt
-```
 
-### Run the interactive agent
+---
 
-```bash
+Quick Start
+
+Run the interactive agent
+
 python run_ai.py
-```
 
-Then type a prompt like:
+Example
 
-```text
-YOU: Analyze our latest incident and suggest next steps
-```
+YOU:
+Help me build an autonomous robotics company.
 
-### Run the API server
+Living AI:
+...
 
-```bash
+---
+
+Running the API
+
+Start the FastAPI server
+
 uvicorn main:app --reload
-```
 
-## Developer Usage
+Available endpoints include:
 
-### Direct Python access
+- GET /
+- POST /process
+- GET /system/status
+- GET /memory/search
+- GET /goals
+- POST /goals/add
+- POST /autonomy/start
+- POST /autonomy/stop
+- GET /autonomy/status
+- GET /autonomy/history
 
-```python
+---
+
+Developer Example
+
 from core.system_engine import LivingAISystem
 
 ai = LivingAISystem()
-result = ai.process("What should I do next?")
-print(result["response"])
-print(result["active_goal"])
-print(result["emotion"])
-```
 
-### FastAPI integration
+response = ai.process(
+    "Help me design an autonomous software company."
+)
 
-```python
-from fastapi import FastAPI
-from core.system_engine import LivingAISystem
+print(response["response"])
 
-app = FastAPI()
-ai = LivingAISystem()
+---
 
-@app.post("/ask")
-def ask(payload: dict):
-    return ai.process(payload["text"])
-```
+Project Mission
 
-## API Endpoints
+To build the foundational cognitive infrastructure that enables AI systems to remember, learn, adapt, evolve, and operate autonomously over long periods of time.
 
-- `GET /` — health check
-- `POST /process` — submit user input and receive a system response
-- `POST /autonomy/start` — start the autonomous background cycle
-- `POST /autonomy/stop` — stop the autonomous background cycle
-- `GET /autonomy/status` — view autonomy runtime state
-- `GET /autonomy/history` — view autonomous cycle history
-- `GET /system/status` — view runtime, memory, goals, and belief status
-- `GET /goals` — view active goals and autonomous goals
-- `POST /goals/add` — add a goal to the cognitive kernel
-- `GET /memory/search?query=...` — search semantic memory
+Living AI is designed to become a reusable cognitive framework that developers can integrate into intelligent applications, autonomous agents, robotics, research systems, and future AGI architectures.
 
-## Persistence
+---
 
-The system persists key runtime data to disk:
+Roadmap
 
-- `semantic_memory.json` — semantic memory items and vector embeddings
-- `distributed_memory.json` — short-term, long-term, and priority memories
-- `self_model.json` — identity state, goals, and learned traits
+Phase 1
 
-## Run with Docker Compose (recommended for scaled local runs)
+- Persistent memory
+- Belief system
+- Goal management
+- Reflection engine
+- Internal simulation
+- Cognitive observatory
+- Autonomous runtime
 
-This project includes a `Dockerfile` and `docker-compose.yml` to run Redis, an RQ worker, and the API.
+Phase 2
 
-1. Build and start the stack:
+- Python package
+- LivingAI Developer SDK
+- REST API Platform
+- Multi-agent collaboration
+- Cloud deployment
+- Web dashboard
 
-```bash
-./run-compose.sh
-```
+Phase 3
 
-Or on Windows:
+- LivingAI.ai Platform
+- Developer accounts
+- API keys
+- Hosted cognitive agents
+- Enterprise deployment
+- Marketplace ecosystem
 
-```powershell
-run-compose.bat
-```
+Long-Term Vision
 
-2. The API will be available on `http://localhost:8000`.
+Create the cognitive infrastructure that enables persistent adaptive intelligence at global scale.
 
-3. Use the `/jobs/{job_id}` endpoint to check queued RQ job status.
+---
 
-Environment variables (can be set in `docker-compose.yml` or your environment):
+Creator
 
-- `LIVING_AI_STORAGE_BACKEND` — `redis` to use Redis, or `json` for filesystem fallback
-- `LIVING_AI_REDIS_URL` — Redis connection URL
-- `LIVING_AI_USE_QUEUE` — `1` to enable RQ enqueueing for heavy tasks
- - `LIVING_AI_POSTGRES_DSN` — Postgres DSN when using Postgres or combined mode
- - `LIVING_AI_STORAGE_BACKEND` — `redis`, `postgres`, `json`, or `both` to use combined Redis (short-term) + Postgres (long-term)
+Charles Washington Juma
 
+Founder of the Living AI Framework
 
-## Notes
+---
 
-This repository is a prototype cognitive agent runtime for experimentation and architecture development. It is designed to demonstrate how multiple AI subsystems can be composed into a single adaptive system, rather than serving as a finished production product.
+Contributing
 
+Living AI is under active development.
+
+Contributions, discussions, research, and collaboration are welcome as the framework evolves toward persistent autonomous intelligence.
+
+---
+
+License
+
+See the LICENSE file for licensing information.
+
+---
+
+Project Status
+
+Living AI is an active research and engineering project focused on building persistent cognitive infrastructure for next-generation intelligent systems.
+
+The framework is intended for researchers, developers, startups, and organizations exploring autonomous agents, cognitive architectures, adaptive AI, and the future of Artificial General Intelligence (AGI).
