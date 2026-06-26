@@ -107,6 +107,78 @@ try:
 except Exception:
     system = None
 
+# If heavy init was skipped, provide a lightweight stub system for smoke tests
+if system is None and os.environ.get("LIVING_AI_SKIP_INIT", "0") == "1":
+    class _StubKernel:
+        def __init__(self):
+            self.goals = []
+
+        def add_goal(self, goal, priority=5):
+            self.goals.append({"goal": goal, "priority": priority})
+
+        def complete_goal(self, goal):
+            for g in list(self.goals):
+                if g.get("goal") == goal or g == goal:
+                    try:
+                        self.goals.remove(g)
+                    except Exception:
+                        pass
+                    return True
+            return False
+
+        def select_goal(self):
+            return self.goals[0] if self.goals else None
+
+    class _StubRuntimeManager:
+        def get_state(self):
+            return {"status": "stub", "uptime": 0}
+
+        def start(self):
+            return True
+
+    class _StubDistributedMemory:
+        def get_memory_stats(self):
+            return {"short_term": 0, "long_term": 0, "priority": 0}
+
+        def store_memory(self, *args, **kwargs):
+            return True
+
+    class _StubSystem:
+        def __init__(self):
+            self.identity = {"name": "StubLivingAI", "version": "stub"}
+            self.identity_traits = []
+            self.lessons_learned = []
+            self.kernel = _StubKernel()
+            self.runtime_manager = _StubRuntimeManager()
+            self.distributed_memory = _StubDistributedMemory()
+            self.belief_engine = type("B", (), {"beliefs": []})()
+            self.autonomous_goals = []
+            self.goal_evolution_history = []
+            self.goal_completion_history = []
+
+        def process(self, text):
+            return {"response": f"stub response to: {text}", "active_goal": self.kernel.select_goal()}
+
+        def start_autonomy(self, interval=5):
+            return {"status": "started", "interval": interval}
+
+        def stop_autonomy(self):
+            return {"status": "stopped"}
+
+        def get_autonomy_status(self):
+            return {"running": False}
+
+        def save_self_model(self):
+            return True
+
+        def record_goal_completion(self, goal, performance_score=0.0):
+            self.goal_completion_history.append({"goal": goal, "score": performance_score})
+
+        def _emit_event(self, t, payload):
+            return True
+
+    system = _StubSystem()
+
 # =========================
 # INPUT MODEL
 # =========================

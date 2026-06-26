@@ -1,32 +1,16 @@
 # core/cognitive_reasoning_engine.py
 
+import os
+
 
 class CognitiveReasoningEngine:
 
-    def __init__(
-
-        self,
-        llm_router=None
-
-        import os
-
-
-    # =========================
-    # REASON
-    # =========================
-    ):
-
+    def __init__(self, llm_router=None):
         self.llm_router = llm_router
 
-        # If queue mode is enabled, enqueue heavy reasoning to worker
-        try:
-            if os.environ.get("LIVING_AI_USE_QUEUE", "0") == "1":
-                from core.task_queue import enqueue_reasoning
-                job = enqueue_reasoning(system_data)
-                return {"queued": True, "job_id": job.id}
-        except Exception:
-            # fallback to local reasoning if enqueue fails
-            pass
+    # =========================
+    # DETECT GOAL TYPE
+    # =========================
     # =========================
     # DETECT GOAL TYPE
     # =========================
